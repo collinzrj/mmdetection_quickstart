@@ -3,14 +3,15 @@ from mmdet.apis import set_random_seed
 import time
 import os
 
-ann_dir = os.environ['ANN_PATH']
-img_prefix = os.environ['IMG_PATH']
-checkpoint = os.environ['MODEL_PATH']
+ann_dir = './data/annotations/'
+img_prefix = './data/images/'
+base_config = BASE_CONFIG_PATH
+checkpoint =  CHECKPOINT_PATH
 
 def generate_config():
-    cfg = Config.fromfile(checkpoint)
+    cfg = Config.fromfile(base_config)
     cfg.dataset_type = 'CocoDataset'
-    cfg.classes = ('cell',)
+    cfg.classes = ('cat',)
 
     for head in cfg.model.roi_head.bbox_head:
         head.num_classes = 1
